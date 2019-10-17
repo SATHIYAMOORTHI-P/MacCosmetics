@@ -1,6 +1,7 @@
 package org.css.in;
 
 import java.awt.AWTException;
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Map;
 
@@ -18,11 +19,15 @@ public class MacCosmatic extends BaseClass{
 	LoginPage l=new LoginPage();
 	
 	@Given("User signin the account")
-	public void user_signin_the_account() {
+	public void user_signin_the_account() throws FileNotFoundException {
 		open("https://www.maccosmetics.com/#");
 		l.getSignin().click();
-		send(l.getUname(),"sathiyamoorthi438@gmail.com");
-		send(l.getPassword(),"Mithran4077");
+		System.out.println(getValues().size());
+		send(l.getUname(),getValues().get(3).get("USER_NAME"));
+		send(l.getPassword(),getValues().get(3).get("PASSWORD"));
+		//send(l.getUname(),"sathiyamoorthi438@gmail.com");
+		//send(l.getPassword(),"Mithran4077");
+		System.out.println("success");
 		l.getBtnClick().click();
 	}
 ProductSearchPage p=new ProductSearchPage();
